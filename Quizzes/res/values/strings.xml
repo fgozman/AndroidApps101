@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Quizzes</string>
+    <string name="quiz_question">Quiz</string>
+    <string name="question">Question</string>
+    <string name="quiz_score">Quiz Score</string>
+    <string name="done">Done</string>
+</resources>

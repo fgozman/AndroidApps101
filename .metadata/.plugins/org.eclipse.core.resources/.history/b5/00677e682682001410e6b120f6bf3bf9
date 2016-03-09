@@ -1,0 +1,153 @@
+/*
+Copyright (c) 2014 Lawrence Angrave
+Dual licensed under Apache2.0 and MIT Open Source License (included below): 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+ */
+package apps101.movingpixels;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+
+public class MainActivity extends Activity {
+
+	protected static final String TAG = MainActivity.class.getSimpleName();
+	private Bitmap b;
+	private Bitmap bPing;
+	private int bPHw;
+	private int bPHh;
+	private float x;
+	private float y;
+	private float vx = 1;
+	private float vy = 1;
+	private Canvas c;
+	private boolean touching;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		bPing = BitmapFactory.decodeResource(getResources(),
+				R.drawable.rain_penguin_180);
+		int desired = getResources().getDimensionPixelSize(R.dimen.penguin);
+		bPHw = bPing.getWidth() / 2;
+		bPHh = bPing.getHeight() / 2;
+		b = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888);
+		c = new Canvas(b);
+
+		final Paint p = new Paint();
+		c.drawColor(0xff808080);
+
+		p.setColor(0xff0000ff);
+		// p.setAntiAlias(true);
+		// p.setStyle(Style.STROKE);
+		// p.setStrokeWidth(0);
+		c.drawLine(0, 3.5f, 3.5f, 0, p);
+
+		final View v = new View(this) {
+			protected void onDraw(Canvas canvas) {
+				// Log.e(TAG," canvas height:"+canvas.getHeight());
+				// Log.e(TAG," view height:"+this.getHeight());
+				canvas.drawColor(0xffff9900);
+				float sx = this.getWidth() / ((float) b.getWidth());
+				float sy = this.getHeight() / ((float) b.getHeight());
+				canvas.save();
+				canvas.scale(sx, sy);
+
+				canvas.drawBitmap(b, 0, 0, null);
+				canvas.restore();
+
+				p.setColor(0x80ffffff);
+				p.setStyle(Style.FILL_AND_STROKE);
+
+				float angle = SystemClock.uptimeMillis() / 10f;
+				canvas.translate(x, y);
+
+				if(MainActivity.this.touching){
+					canvas.scale(1.2f, 1.2f,bPHw, bPHh);
+				}
+				canvas.drawCircle(bPHw, bPHh, bPHh, p);
+				canvas.rotate(angle, bPHw, bPHh);
+				canvas.drawBitmap(bPing, 0, 0, null);
+				if (y + 2 * bPHh + vy + 1 > this.getHeight()) {
+					vy = -0.8f * vy;
+				} else {
+					vy = vy + 1;
+				}
+
+				x = x + vx;
+				y = y + vy;
+				vy = vy + 1;
+				postInvalidateDelayed(100);
+			};
+		};
+
+		setContentView(v);
+
+		v.setOnTouchListener(new OnTouchListener() {
+
+			
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int action = event.getAction();
+				if (MotionEvent.ACTION_DOWN == action
+						|| MotionEvent.ACTION_CANCEL == action) {
+					touching = true;
+				} else if (MotionEvent.ACTION_UP == action) {
+					touching = false;
+				}
+
+				if (MotionEvent.ACTION_DOWN == action
+						|| MotionEvent.ACTION_MOVE == action) {
+					x = event.getX();
+					y = event.getY();
+					vx = 0;
+					vy = 0;
+
+				}
+				float sx = b.getWidth() / (float) v.getWidth();
+				float sy = b.getHeight() / (float) v.getHeight();
+				float pX = event.getX() * sx;
+				float pY = event.getY() * sy;
+				c.drawCircle(pX, pY, 2, p);
+				// event.getAction();
+				return true;
+			}
+		});
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

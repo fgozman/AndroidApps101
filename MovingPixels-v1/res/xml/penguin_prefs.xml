@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference android:title="Enable Gravity" android:summary="Penguins fall to the flor." android:key="gravity"/>
+    <EditTextPreference android:key="name" android:summary="Name of Your Penguin" android:title="Name of Your Penguin"/>
+    
+
+</PreferenceScreen>

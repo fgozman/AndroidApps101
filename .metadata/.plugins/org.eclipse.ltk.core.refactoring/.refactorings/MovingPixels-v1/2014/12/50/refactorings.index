@@ -1,0 +1,7 @@
+1418405658630	Rename field 'touch'
+1418406947613	Extract method 'drawBackground'
+1418407017944	Extract method 'drawPenguin'
+1418407096746	Extract method 'doPenguinPhysics'
+1418407801173	Move type 'PenguinView' to new file
+1418408393447	Extract method 'init'
+1418410140070	Extract method 'showPrefBeforeHoneycomb'

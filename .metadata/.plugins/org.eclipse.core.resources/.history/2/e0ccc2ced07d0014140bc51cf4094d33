@@ -1,0 +1,387 @@
+package org.learn.programmingart;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.text.TextPaint;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements OnTouchListener,
+		OnClickListener, OnLongClickListener {
+
+	private static final float TRANSFORMED_ZONE_FRACTION = 1 / 8f;
+	private static final float SCALE_FACTOR = 1.5f;
+	private static final int ROTATE_ANGLE = 45;
+	private static final int REQUEST_CODE = 123;
+	private static final String TAG = MainActivity.class.getSimpleName();
+
+	private Bitmap bitmap;
+
+	private Handler closeHandler;
+
+	private int imageWidth;
+	private int imageHeight;
+	private ImageView imageView;
+
+	private PointF clickedPoint;
+
+	private static enum Transform {
+		SCALE, ROTATE
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		imageWidth = -1;
+		imageHeight = -1;
+		clickedPoint = null;
+		if (bitmap != null) {
+			bitmap.recycle();
+		}
+		closeHandler = new Handler();
+		setContentView(R.layout.activity_main);
+		imageView = getImageView();
+
+	}
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		if (hasFocus) {
+			finishAfter10Seconds();
+		} else {
+			stopFinish();
+		}
+
+		// ignore if already calculated and initialized
+		if (imageHeight != -1 || imageWidth != -1)
+			return;
+		
+		// here we can read the width and height
+		imageWidth = imageView.getWidth();
+		imageHeight = imageView.getHeight();
+		// do not block the event here
+		imageView.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+
+				// create mutable bitmap
+				bitmap = Bitmap.createBitmap(imageWidth, imageHeight,
+						Bitmap.Config.ARGB_8888);
+				Canvas canvas = new Canvas(bitmap);
+				drawLinesAndWords(canvas);
+
+				// set the content in the view
+				imageView.setImageBitmap(bitmap);
+				imageView.setLongClickable(true);
+				imageView.setOnTouchListener(MainActivity.this);
+				imageView.setOnClickListener(MainActivity.this);
+				imageView.setOnLongClickListener(MainActivity.this);
+				// show information about timeout
+				Toast t = Toast.makeText(
+						MainActivity.this.getApplicationContext(),
+						R.string.inactivMessage, Toast.LENGTH_SHORT);
+				t.setGravity(Gravity.CENTER, 0, 0);
+				t.show();
+
+			}
+
+		}, 0);
+
+	}
+
+	private ImageView getImageView() {
+		return (ImageView) findViewById(R.id.imageView1);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+			Uri uri = data.getData();
+
+			try {
+				// load bitmap
+				Bitmap bm = getBitmap(uri);
+				Canvas canvas = new Canvas(bitmap);
+				// draw in the center of canvas
+				canvas.drawBitmap(bm, imageWidth / 2 - bm.getWidth() / 2,
+						imageHeight / 2 - bm.getHeight() / 2, null);
+				// release resources
+				bm.recycle();
+				// redraw
+				imageView.invalidate();
+			} catch (Exception e) {
+				Log.e(TAG, "Decoding bitmap", e);
+			}
+
+		}
+	}
+
+	private void drawLinesAndWords(Canvas canvas) {
+		int width = canvas.getWidth();
+		int height = canvas.getHeight();
+
+		String[] words = getResources().getStringArray(R.array.words);
+		// initialize the random generator with different seed (here the
+		// time stamp)
+		// in order to generate different numbers each time the application is
+		// started
+		Random random = new Random(System.currentTimeMillis());
+
+		// draw random lines
+		Paint p = new Paint();
+		for (int i = 0; i < 100; i++) {
+			// choose random color
+			int baseColor = random.nextInt(0xffffff);
+			// set color with transparency
+			p.setColor(0x50000000 + baseColor);
+			p.setStrokeWidth(2 + random.nextInt(41));
+			canvas.drawLine(0, random.nextInt(height), width,
+					random.nextInt(height), p);
+
+		}
+
+		// draw random words
+		TextPaint tp = new TextPaint();
+		tp.setTextAlign(Align.LEFT);
+		tp.setStyle(Style.FILL_AND_STROKE);
+		float densityMultiplier = getResources().getDisplayMetrics().density;
+		Rect textBounds = new Rect();
+		// draw random 50 words
+		for (int i = 0; i < 50; i++) {
+			// choose random color
+			int baseColor = random.nextInt(0xffffff);
+			tp.setTextSize((8 * (random.nextInt(4) + 1)) * densityMultiplier);
+			tp.setColor(0xff000000 + baseColor);
+
+			// choose a word
+			String word = words[random.nextInt(words.length)];
+
+			// calculate text dimensions
+			tp.getTextBounds(word, 0, word.length(), textBounds);
+			// calculate width with measureText since bounds are not so accurate
+			// for this
+			int textW = Math.round(tp.measureText(word));
+			int textH = textBounds.bottom - textBounds.top + 1;
+			// draw the text
+			canvas.drawText(word,
+					random.nextInt((int) Math.floor(width - textW) - 4) + 2,
+					random.nextInt(height - textH - 4) - textBounds.top + 2, tp);
+		}
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
+
+		if (bitmap != null && clickedPoint != null) {
+
+			transformSelectedRegion(Transform.ROTATE);
+		}
+		finishAfter10Seconds();
+		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+
+		if (bitmap != null && clickedPoint != null) {
+
+			transformSelectedRegion(Transform.SCALE);
+		}
+		finishAfter10Seconds();
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		int actionAndEvent = event.getAction() & MotionEvent.ACTION_MASK;
+		if (actionAndEvent == MotionEvent.ACTION_DOWN) {
+			// save clicked point for click and long click
+			clickedPoint = new PointF(event.getX(), event.getY());
+			stopFinish();
+		}
+		return false;
+	}
+
+	private void transformSelectedRegion(Transform transform) {
+		// calculate zone to be transformed
+		float sizeX = imageWidth * TRANSFORMED_ZONE_FRACTION;
+		float sizeY = imageHeight * TRANSFORMED_ZONE_FRACTION;
+		int startX = Math.max(0, Math.round(clickedPoint.x - sizeX / 2));
+		int startY = Math.max(0, Math.round(clickedPoint.y - sizeY / 2));
+		int width = Math.round((startX + sizeX) < imageWidth ? sizeX
+				: imageWidth - startX);
+		int height = Math.round((startY + sizeY) < imageHeight ? sizeY
+				: imageHeight - startY);
+
+		// create the transformation matrix
+		Matrix matrix = new Matrix();
+		if (transform == Transform.ROTATE) {
+			// rotate
+			matrix.postRotate(ROTATE_ANGLE);
+		} else if (transform == Transform.SCALE) {
+			// scale
+			matrix.postScale(SCALE_FACTOR, SCALE_FACTOR);
+		} else
+			return;
+
+		// take the transformed zone from the original bitmap to be transformed
+		Bitmap result = Bitmap.createBitmap(bitmap, startX, startY, width,
+				height, matrix, true);
+
+		// draw transformed bitmap on original mutable bitmap
+		Canvas canvas = new Canvas(bitmap);
+		canvas.drawBitmap(result, startX - (result.getWidth() - width) / 2,
+				startY - (result.getHeight() - height) / 2, null);
+		// clean resource
+		result.recycle();
+
+		imageView.invalidate();
+	}
+
+	public void saveAndShare(View v) {
+		if (bitmap != null) {
+			// get path where to save
+			File path = Environment
+					.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+			// make dirs if not exist
+			path.mkdirs();
+
+			// create a file with unique name based on time stamp
+			String fileName = "Imagen_" + System.currentTimeMillis() + ".jpg";
+
+			// save in the file
+			File file = new File(path, fileName);
+			FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream(file);
+				bitmap.compress(CompressFormat.JPEG, 100, fos);
+			} catch (FileNotFoundException e) {
+				Log.e(TAG, "saveAndShare", e);
+				return;
+			} finally {
+				if (fos != null) {
+					try {
+						fos.close();
+					} catch (IOException e) {
+						Log.e(TAG, "saveAndShare", e);
+					}
+				}
+			}
+			Uri uri = Uri.fromFile(file);
+			// refresh pictures lib
+			Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+			intent.setData(uri);
+			sendBroadcast(intent);
+
+			// start sharing
+			Intent share = new Intent(Intent.ACTION_SEND);
+			share.setType("image/jpeg");
+			share.putExtra(Intent.EXTRA_STREAM, uri);
+			startActivity(Intent.createChooser(share,
+					getString(R.string.shareUsing)));
+
+		}
+	}
+
+	public void pickPicture(View v) {
+		Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+		i.setType("image/*");
+
+		startActivityForResult(
+				Intent.createChooser(i, getString(R.string.selectPicture)),
+				REQUEST_CODE);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	private Bitmap getBitmap(Uri uri) throws IOException {
+		InputStream in = null;
+
+		Options options = new Options();
+		// get only bitmap bounds
+		options.inJustDecodeBounds = true;
+		try {
+			in = getContentResolver().openInputStream(uri);
+			BitmapFactory.decodeStream(in, null, options);
+		} finally {
+			if (in != null) {
+				// close in any case
+				in.close();
+			}
+		}
+
+		// calculate the sample
+		int sample = 1;
+		int w = options.outWidth;
+		int h = options.outHeight;
+		int dw = imageWidth * 2 / 3;
+		int dh = imageHeight * 2 / 3;
+		while (w > dw * sample || h > dh * sample) {
+			sample = sample * 2;
+		}
+
+		// get bitmap at given sample
+		options.inJustDecodeBounds = false;
+		options.inSampleSize = sample;
+		try {
+			in = getContentResolver().openInputStream(uri);
+			return BitmapFactory.decodeStream(in, null, options);
+		} finally {
+			in.close();
+		}
+	}
+
+	private void finishAfter10Seconds() {
+
+		closeHandler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				finish();
+
+			}
+		}, 10000);
+	}
+
+	private void stopFinish() {
+		closeHandler.removeCallbacksAndMessages(null);
+	}
+
+}

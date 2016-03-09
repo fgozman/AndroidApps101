@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Awesome2a/publish/Awesome2a.apk&apos; to &apos;Illiac1-Version1.apk&apos;" description="Rename resource &apos;Awesome2a.apk&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="publish/Awesome2a.apk" name="Illiac1-Version1.apk" stamp="1414915117483" updateReferences="true"/>
+</session>

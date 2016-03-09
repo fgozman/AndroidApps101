@@ -1,0 +1,34 @@
+1415039144383	Delete element
+1415039622732	Delete element
+1415043640673	Rename local variable 'spinner'
+1415043671056	Extract method 'initSpinnerMeasures'
+1415044816222	Extract method 'getAdapterForMeasure'
+1415044888287	Rename method 'initSpinnerFromUnits'
+1415075666889	Rename type 'MeasureUnit'
+1415076826182	Rename field 'currentMeasurePos'
+1415078595546	Rename field 'MEASURE_LENGTH_POS'
+1415078602667	Rename field 'MEASURE_SPEED_POS'
+1415078610403	Rename field 'MEASURE_TEMPERATURE_POS'
+1415078619082	Rename field 'MEASURE_WEIGHT_POS'
+1415117764317	Copy file
+1415122415906	Delete element
+1415124486559	Copy compilation unit
+1415125100801	Rename local variable 'inmeter'
+1415125115996	Rename local variable 'inmeter'
+1415125224746	Rename local variable 'sm'
+1415125233609	Rename local variable 'ln'
+1415127550474	Delete element
+1415128000450	Delete element
+1415202134079	Rename method 'knotTokm'
+1415202293050	Delete element
+1415289924721	Rename method 'initSpinnersFromToForMeasure'
+1415291754660	Rename field 'CURRENT_MEASURE'
+1415291765438	Rename field 'CURRENT_FROM_UNIT'
+1415291783029	Rename field 'CURRENT_TO_UNIT'
+1415292936738	Extract method 'initInputFieldsFromTo'
+1415293728477	Extract method 'getFromString'
+1415293754961	Extract method 'getToString'
+1415293868269	Extract constant 'FROM_VALUE_STATE_KEY'
+1415293920108	Extract constant 'TO_VALUE_STATE_KEY'
+1415295154595	Extract constant 'STATE_KEY'
+1415303677250	Delete element

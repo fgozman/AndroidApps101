@@ -1,0 +1,30 @@
+package apps101.movingpixels;
+
+import android.app.FragmentTransaction;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
+
+public class SettingsActivity extends PreferenceActivity{
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			showPrefBeforeHoneycomb();
+		}else{
+			showPrefFragmentStyle(savedInstanceState);
+		}
+	}
+
+	private void showPrefFragmentStyle(Bundle savedInstanceState) {
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(android.R.id.content, fragment)
+		transaction.commit();
+		
+	}
+
+	@SuppressWarnings("deprecation")
+	private void showPrefBeforeHoneycomb() {
+		addPreferencesFromResource(R.xml.penguin_prefs);
+	}
+}

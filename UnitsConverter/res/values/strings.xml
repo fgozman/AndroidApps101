@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Units Converter</string>
+    <string-array name="measures_array">
+        <item>Length</item>
+        <item>Speed</item>
+        <item>Temperature</item>
+    </string-array>
+    <string-array name="length_units_array">
+        <item>Meter</item>
+        <item>Foot</item>
+        <item>Inch</item>
+        <item>Yard</item>
+        <item>Mile</item>
+    </string-array>
+    <string-array name="speed_units_array">
+        <item>Kilometers/Hour</item>
+        <item>Miles/Hour</item>
+        <item>Feet/Second</item>
+        <item>Knots</item>
+    </string-array>
+    <string-array name="temperature_units_array">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+</resources>

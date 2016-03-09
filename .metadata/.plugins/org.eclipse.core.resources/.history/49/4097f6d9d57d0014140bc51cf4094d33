@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Prog Art</string>
+    <string name="saveAndShare">Save&amp;Share</string>
+    <string name="pickPicture">Pick a picture</string>
+    <string name="artImage">Art image</string>
+	<string name="hintMessage">After 10 seconds of inactivity the app will close!</string>
+	<string name="shareUsing">Share using...</string>
+	<string name="selectPicture">Select...</string>
+    <string-array name="words">
+        <item>easier</item>
+        <item>interesting</item>
+        <item>honest</item>
+        <item>forests</item>
+        <item>comfortable</item>
+        <item>gently</item>
+        <item>fresh</item>
+        <item>pal</item>
+        <item>warmth</item>
+        <item>restwelcome</item>
+        <item>dearest</item>
+        <item>useful</item>
+        <item>safe</item>
+        <item>cherry</item>
+        <item>better</item>
+        <item>piano</item>
+        <item>silk</item>
+        <item>relief</item>
+        <item>rhyme</item>
+        <item>hi</item>
+        <item>agree</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Programming Art</string>
+    <string name="saveAndShare">Save&amp;Share</string>
+     <string name="pickPicture">Pick a picture</string>
+      <string name="artImage">Art image</string>
+
+</resources>

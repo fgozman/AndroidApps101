@@ -1,0 +1,28 @@
+1416429962572	Extract method 'loadQuizzes'
+1416431912309	Copy file
+1416433654791	Copy compilation unit
+1416435003650	Rename field 'quizzes'
+1416499509618	Extract method 'addVariants'
+1416500247978	Rename type 'QuizzesPersistence'
+1416500339619	Rename resource 'quizz.xml'
+1416500545006	Delete element
+1416501651917	Rename type 'StableArrayAdapter'
+1416501719168	Rename local variable 'list'
+1416503549212	Extract constant 'QUIZ_INDEX'
+1416508737574	Copy file
+1416509088606	Rename resource 'checkbox'
+1416509666742	Rename resource 'checkbox.xml'
+1416509702103	Rename resource 'radio_button.xml'
+1416509806157	Copy file
+1416511742315	Extracts string 'Done' into R.string.done
+1416512068238	Copy compilation unit
+1416512189410	Copy file
+1416512391446	Extract constant 'QUESTION_INDEX'
+1416513550690	Rename field 'response'
+1416517602841	Delete element
+1416517753063	Delete element
+1416543427318	Rename local variable 'textViewSubject'
+1416543764045	Delete element
+1416544076641	Delete element
+1416545113462	Delete element
+1416597148949	Delete element

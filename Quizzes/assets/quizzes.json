@@ -1,0 +1,178 @@
+[
+    {
+        "questions": [
+            {
+                "answers": [
+                    "1"
+                ],
+                "name": "Question 1",
+                "statement": "True or false? If you create a field (also known as an 'instance') variable (see below), then the variable is part of the activity and will live for as long as the activity.<br/><font color='red'>class ABC{<br/>&nbsp;&nbsp;View Pointer;<br/>}</font>",
+                "type": "single",
+                "variants": [
+                    "true",
+                    "flase"
+                ]
+            },
+            {
+                "answers": [
+                    "getSettings()"
+                ],
+                "name": "Question 2",
+                "statement": "Write the missing code to enable the web zoom controls.<br/><br/><font color='red'>myWebView._________.setBuiltInZoomControls(true);</font>",
+                "type": "enter"
+            },
+            {
+                "answers": [
+					"1",
+                    "2",
+                    "3"
+                ],
+                "name": "Question 3",
+                "statement": "Select all that are true. The package line:",
+                "type": "multiple",
+                "variants": [
+                    "Cannot appear twice in the same Java file",
+                    "Appears at the top of the Java file (before the import and class definition)",
+                    "Must agree with the directory path of the Java file",
+                    "Appears at the end of the Java file (after the class definition)"
+                ]
+            },
+            {
+                "answers": [
+                    "3"
+                ],
+                "name": "Question 4",
+                "statement": "Which of the following starts an Activity, 'HighScoreScreen.java' in the same package?",
+                "type": "single",
+                "variants": [
+                    "<font color='red'>Intent go = new Intent();<br/>go.setClass(this, HighScoreScreen.class);</font>",
+                    "<font color='red'>go.setClass(this, HighScoreScreen.class);<br/>Intent go = new Intent();<br/>startActivity(go);</font>",
+                    "<font color='red'>Intent go = new Intent();<br/>go.setClass(this, HighScoreScreen.class);<br/>startActivity(go);</font>"
+                ]
+            }
+        ],
+        "subject": "Android Test 1"
+    },
+    {
+        "questions": [
+            {
+                "answers": [
+                    "3"
+                ],
+                "name": "Question 1",
+                "statement": "To build an app based on static webpage content, the content should be placed in which directory?",
+                "type": "single",
+                "variants": [
+                    "pages/",
+                    "res/",
+                    "assets/",
+                    "web/"
+                ]
+            },
+            {
+                "answers": [
+                    "1"
+                ],
+                "name": "Question 2",
+                "statement": "The correct URL to refer to index.html in the assets directory is:",
+                "type": "single",
+                "variants": [
+                    "file:///android_asset/index.html",
+                    "file:///android_assets/index.html",
+                    "file://android_asset/index.html",
+                    "file://android_assets/index.html"
+                ]
+            }
+        ],
+        "subject": "Android Test 2"
+		},
+	    {
+	        "questions": [
+	            {
+	                "answers": [
+	                    "1"
+	                ],
+	                "name": "Question 1",
+	                "statement": "True or false? If you create a field (also known as an 'instance') variable (see below), then the variable is part of the activity and will live for as long as the activity.<br/><font color='red'>class ABC{<br/>&nbsp;&nbsp;View Pointer;<br/>}</font>",
+	                "type": "single",
+	                "variants": [
+	                    "true",
+	                    "flase"
+	                ]
+	            }
+	        ],
+	        "subject": "Android Test 3"
+	    },
+	    {
+	        "questions": [
+	            
+	            {
+	                "answers": [
+	                    "getSettings()"
+	                ],
+	                "name": "Question 2",
+	                "statement": "Write the missing code to enable the web zoom controls.<br/><br/><font color='red'>myWebView._________.setBuiltInZoomControls(true);</font>",
+	                "type": "enter"
+	            }
+	        ],
+	        "subject": "Android Test 4"
+	    },
+	    {
+	        "questions": [
+	            {
+	                "answers": [
+						"1",
+	                    "2",
+	                    "3"
+	                ],
+	                "name": "Question 3",
+	                "statement": "Select all that are true. The package line:",
+	                "type": "multiple",
+	                "variants": [
+	                    "Cannot appear twice in the same Java file",
+	                    "Appears at the top of the Java file (before the import and class definition)",
+	                    "Must agree with the directory path of the Java file",
+	                    "Appears at the end of the Java file (after the class definition)"
+	                ]
+	            }
+	        ],
+	        "subject": "Android Test 5"
+	    },
+        {
+			"questions": [
+            {
+                "answers": [
+                    "3"
+                ],
+                "name": "Question 4",
+                "statement": "Which of the following starts an Activity, 'HighScoreScreen.java' in the same package?",
+                "type": "single",
+                "variants": [
+                    "<font color='red'>Intent go = new Intent();<br/>go.setClass(this, HighScoreScreen.class);</font>",
+                    "<font color='red'>go.setClass(this, HighScoreScreen.class);<br/>Intent go = new Intent();<br/>startActivity(go);</font>",
+                    "<font color='red'>Intent go = new Intent();<br/>go.setClass(this, HighScoreScreen.class);<br/>startActivity(go);</font>"
+                ]
+            }
+        ],
+        "subject": "Android Test 6"
+    	},
+	    {
+	        "questions": [
+	            {
+	                "answers": [
+	                    "3"
+	                ],
+	                "name": "Question 1",
+	                "statement": "To build an app based on static webpage content, the content should be placed in which directory?",
+	                "type": "single",
+	                "variants": [
+	                    "pages/",
+	                    "res/",
+	                    "assets/",
+	                    "web/"
+	                ]
+	            }
+	        ],
+	        "subject": "Android Test 7"
+		}
+	]

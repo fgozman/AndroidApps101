@@ -1,0 +1,12 @@
+1417635777763	Rename package 'org.learn.imagen'
+1417635804116	Rename package 'org.learn.imagen'
+1417636304608	Delete elements
+1417636387176	Delete element
+1417809536609	Rename field 'firstDistance'
+1417844733089	Extract method 'finishAfter10Seconds'
+1417844894790	Rename field 'handler'
+1417845070482	Extract method 'stopFinish'
+1417847960715	Rename field 'displayW'
+1417848172683	Extract method 'drawLinesAndWords'
+1417890484119	Rename field 'midPoint'
+1417892025813	Extract method 'transformSelectedRegion'

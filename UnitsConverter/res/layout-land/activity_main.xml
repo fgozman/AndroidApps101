@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:textSize="22sp"
+    tools:context="com.leonard.unitsconverter.MainActivity" >
+
+  
+    <Spinner
+        android:id="@+id/spinner_measures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+        />
+	<View android:id="@+id/separator"
+	    android:layout_width="match_parent"
+	    android:layout_height="1dp"
+	    android:background="@android:color/darker_gray"
+	    android:layout_marginTop="8dp"
+	    android:layout_below="@id/spinner_measures"
+	    />
+    <Spinner
+        android:id="@+id/spinner_from_units"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/separator" />
+    <EditText
+        android:id="@+id/editText_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/separator"
+        android:layout_toRightOf="@id/spinner_from_units" 
+        android:inputType="numberDecimal|numberSigned" 
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="22sp"
+        android:gravity="right"
+        android:maxLength="50"
+        >
+
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spinner_to_units"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/spinner_from_units" 
+        />
+	<EditText
+        android:id="@+id/editText_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_from"
+        android:layout_toRightOf="@id/spinner_to_units" 
+        android:inputType="numberDecimal|numberSigned"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp" 
+        android:gravity="right"
+        android:textSize="22sp"
+        android:maxLength="50">
+
+    </EditText>
+    
+</RelativeLayout>

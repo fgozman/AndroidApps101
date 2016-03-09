@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">2cs</string>
+    <string name="csname1">Alan Turing</string>
+    <string name="csimagedescription1">Alan Turing picture</string>
+    <string name="cscaption1">Alan Mathison Turing (23 June 1912 – 7 June 1954) was a British mathematician, 
+        logician, cryptanalyst, philosopher, pioneering computer scientist, mathematical biologist, 
+        and marathon and ultra distance runner. He was highly influential in the development of computer science, 
+        providing a formalisation of the concepts of "algorithm" and "computation" with the Turing machine, 
+        which can be considered a model of a general purpose computer. 
+        Turing is widely considered to be the father of theoretical computer science and artificial intelligence.
+        </string>
+    <string name="csname2">John von Neumann</string>
+    <string name="csimagedescription2">John von Neumann picture</string>
+     <string name="cscaption2">John von Neumann (December 28, 1903 – February 8, 1957) was a Hungarian and American pure and applied mathematician, 
+         physicist, inventor and polymath. He made major contributions to a number of fields, including mathematics 
+         (foundations of mathematics, functional analysis, ergodic theory, geometry, topology, and numerical analysis),
+          physics (quantum mechanics, hydrodynamics, and fluid dynamics), economics (game theory), computing 
+          (Von Neumann architecture, linear programming, self-replicating machines, stochastic computing), and statistics.
+           He was a pioneer of the application of operator theory to quantum mechanics, in the development of 
+           functional analysis, a principal member of the Manhattan Project and the Institute for Advanced Study 
+           in Princeton (as one of the few originally appointed), and a key figure in the development of game 
+           theory and the concepts of cellular automata, the universal constructor, and the digital computer.
+        </string>
+    <string name="action_settings">Settings</string>
+
+</resources>
